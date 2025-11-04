@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+
+  <!-- GitHub Markdown CSS: README 같은 타이포그래피 -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown-light.css"
+        media="(prefers-color-scheme: light)">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown-dark.css"
+        media="(prefers-color-scheme: dark)">
+
+  <!-- 코드 하이라이트(rouge용 GitHub 스타일 비슷한 테마) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+  <style>
+    /* README처럼 중앙 정렬 + 여백 */
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+    @media (max-width: 767px) {
+      .markdown-body { padding: 1rem; }
+    }
+  </style>
+
+  <!-- MathJax (수식) -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <!-- 본문을 README 스타일로 감싸기 -->
+  <article class="markdown-body">
+    {{ content }}
+  </article>
+
+  <!-- 하이라이트.js: rouge가 못 칠한 경우 대비 (선택) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => { document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el)); });</script>
+</body>
+</html>
