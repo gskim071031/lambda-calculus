@@ -1,0 +1,170 @@
+<h1>람다 산법(Lambda Calculus)</h1>
+<p>람다 산법은 계산을 함수와 함수의 연산으로 추상화한 체계로, 람다 항과 변환 규칙으로 구성된다.
+미국의 수학자이자 컴퓨터 과학자 알론조 처치(Alonzo Church)가 1930년대에 고안했다.
+람다 산법은 다른 계산 모델인 튜링 기계와 동치이며, 처치-튜링 명제에 따라 모든 기계적인 계산은 람다 산법으로 표현할 수 있다고 추정한다.</p>
+<h2>익명 함수(Anonymous function)</h2>
+<p>람다 산법에서 모든 함수는 익명 함수로 정의한다.
+익명 함수는 $λ(\text{매개 변수}).(\text{표현식})$의 형태로 나타내며, 그 자체로 함수이자 변수이다.
+익명 함수는 한 번에 하나의 매개 변수만 취한다. 다변수 함수의 경우 이를 일변수 함수들로 나누는 과정인 커링(Currying)을 통해 여러 개의 익명 함수로 나타낼 수 있다.</p>
+<p>다음은 일변수 함수 $f(x)$와 다변수 함수 $g(x)$를 익명 함수로 변환하는 예시이다.</p>
+<p>$$
+f(x) = 2x+1 \quad \Rightarrow \quad f = \lambda x. 2x+1 \
+g(x, y) = x^2 + y^2 \quad \Rightarrow \quad g = \lambda x. \lambda y. x^2 + y^2
+$$</p>
+<h2>람다 항(Lambda term)</h2>
+<h3>람다 항의 귀납적 정의</h3>
+<ol>
+<li>
+<p>변수 $x$는 람다 항이다.</p>
+</li>
+<li>
+<p>변수 $x$와 표현식 $M$에 대해 $(\lambda x. M)$은 람다 항이다.</p>
+</li>
+<li>
+<p>표현식 $M$, $N$에 대해 $(M \ N)$은 람다 항이다.</p>
+</li>
+</ol>
+<p>편의상 변수(Variable)를 $x$, $y$, $z$, ..., 표현식(Expression)을 $M$, $N$, $L$, ...로 표기하지만, 이들은 모두 람다 항이다.</p>
+<h3>표기법</h3>
+<p>다음은 일반적인 람다 항 표기법이다.</p>
+<ol>
+<li>
+<p>적용은 앞에서부터 결합한다고 가정한다.</p>
+</li>
+<li>
+<p>추상화의 표현식은 가능한 한 뒤까지 확장한다. 즉, 추상화는 적용보다 우선순위가 낮다.</p>
+</li>
+<li>
+<p>연속된 추상화는 축약하여 표기할 수 있다.</p>
+</li>
+<li>
+<p>람다 항 내 모든 변수와 표현식이 단일 문자인 경우, 적용에서 공백을 생략할 수 있다.</p>
+</li>
+</ol>
+<p>의도한 연산 순서가 기본 원칙을 위배하지 않으면 괄호를 생략할 수 있다.</p>
+<h3>자유 변수와 바운드 변수</h3>
+<ul>
+<li>
+<p>변수는 기본적으로 자유 변수(Free variable)이다.</p>
+</li>
+<li>
+<p>변수가 익명 함수에 의해 매개 변수(Parameter)로 사용될 때, 변수가 바인딩(Binding) 되었다고 하고 변수는 바운드 변수(Bound variable)가 된다.</p>
+</li>
+</ul>
+<p>다음은 자유 변수 집합 $FV$와 바운드 변수 집합 $BV$의 정의이다.</p>
+<ol>
+<li>
+<p>$FV(x) = {x} ,; BV(x) = \varnothing$</p>
+</li>
+<li>
+<p>$FV(\lambda x. M) = FV(M) \backslash {x} ,; BV(\lambda x. M) = BV(M) \cup {x}$</p>
+</li>
+<li>
+<p>$FV(MN) = FV(M) \cup FV(N) ,; BV(MN) = BV(M) \cup BV(N)$</p>
+</li>
+</ol>
+<p>$\alpha$-전환을 사용하여 임의의 람다 항 $M$, $N$에 대해 $(FV(M) \cup BV(M)) \cap (FV(N) \cup BV(N)) = \varnothing$이게 변환하는 것이 가능하다.
+이는 변수의 이름이 같더라도 서로 다른 추상화로 바인딩 되기 때문으로, 따라서 정의 3에서 모순이 발생하지는 않는다.
+자세한 내용은 $\alpha$-전환에서 다룬다.</p>
+<h3>대입(Substitution)</h3>
+<p>대입은 표현식 내 특정 변수를 람다 항으로 대체하는 연산이다.
+변수 $x$에 표현식 $N$을 대입하는 것을 $[x := N]$으로 표현한다.
+다음은 대입의 정의이다.</p>
+<ol>
+<li>
+<p>$x[x := N] = N$</p>
+</li>
+<li>
+<p>$y[x := N] = y \quad \text{for } x \ne y$</p>
+</li>
+<li>
+<p>$(\lambda x. M)[x := N] = \lambda x. M$</p>
+</li>
+<li>
+<p>$(\lambda y. M)[x := N] = \lambda y. (M [x := N]) \quad \text{for } x \ne y$</p>
+</li>
+<li>
+<p>$(L M)[x := N] = (L [x := N])(M [x := N])$</p>
+</li>
+</ol>
+<p>정의에 따라 대입은 대체할 변수 $x$가 람다 항의 자유 변수일 때 유효한 연산이다.</p>
+<p>또한 $\alpha$-전환을 사용하여 임의의 변수 $y$와 람다 항 $N$에 대해 $y \notin FV(N)$이게 변환하는 것이 가능하다.
+따라서 정의 4에서 람다 항의 의미가 임의로 변하지는 않는다.
+자세한 내용은 $\alpha$-전환에서 다룬다.</p>
+<h3>추상화(Abstraction)</h3>
+<p>변수 $x$와 표현식 $M$에 대해 $\lambda x. M$을 $x$에 대한 $M$의 추상화라고 한다.
+추상화는 매개 변수를 $x$, 표현식을 $M$으로 하는 익명 함수를 생성하며, 따라서 변수 $x$가 표현식 $M$의 자유 변수일 때 유효한 연산이다.</p>
+<h3>적용(Application)</h3>
+<p>표현식 $M$, $N$에 대해 $MN$을 $N$에 대한 $M$의 적용이라고 한다.
+적용은 함수를 $M$으로 하고, 함수에 $N$을 대입한 함숫값 $M(N)$을 생성한다.</p>
+<h2>변환 규칙</h2>
+<p>람다 항은 다음의 세 가지 변환 규칙에 따라 변환될 수 있다.</p>
+<ol>
+<li>
+<p>$\alpha$-전환($\alpha$-Conversion)</p>
+</li>
+<li>
+<p>$\beta$-축약($\beta$-Reduction)</p>
+</li>
+<li>
+<p>$\eta$-축약($\eta$-Reduction)</p>
+</li>
+</ol>
+<p>어떤 두 람다 항이 변환 규칙을 통해 같은 람다 항으로 변환된다면 이들을 동치(Equivalent)라고 한다.</p>
+<h3>$\alpha$-전환</h3>
+<p>$$
+\lambda x. M \rightarrow_\alpha \lambda y. M[x := y] \quad \text{for } y \notin FV(M)
+$$</p>
+<p>$\alpha$-전환은 익명 함수 $\lambda x. M$에서 바운드 변수 $x$의 이름을 변경하는 변환이다.
+이는 추상화에서 변수의 이름이 람다 항에 영향을 주지 않음을 의미한다.</p>
+<p>다만 $\alpha$-전환 시 다음의 경우를 주의하라.</p>
+<ol>
+<li>
+<p>이름이 변경되는 변수 $x$는 동일한 추상화로 바인딩 된 변수여야 한다.</p>
+<p>$\lambda x. \lambda x. x \rightarrow_\alpha
+\lambda x. \lambda y. y ,; \lambda y. \lambda x. x$</p>
+<p>$\lambda x. \lambda x. x \nrightarrow_\alpha
+\lambda y. \lambda x. y ,; \lambda y. \lambda y. y$</p>
+</li>
+<li>
+<p>변수 $x$의 변경된 이름 $y$가 다른 추상화에 포획(Capture)되지 않아야 한다.</p>
+<p>$\lambda x. \lambda y. xy \rightarrow_\alpha
+\lambda z. \lambda y. zy ,; \lambda x. \lambda z. xz$</p>
+<p>$\lambda x. \lambda y. xy \nrightarrow_\alpha
+\lambda x. \lambda x. xx ,; \lambda y. \lambda y. yy$</p>
+</li>
+</ol>
+<p>이러한 문제는 드 브뤼인(de Bruijn) 인덱스 표기 등을 사용하여 방지할 수 있다.</p>
+<h3>$\beta$-축약</h3>
+<p>$$
+(\lambda x. M) N \rightarrow_\beta M[x := N] \quad \text{for } BV(M) \cap FV(N) = \varnothing
+$$</p>
+<p>$\beta$-축약은 익명 함수 $\lambda x. M$의 표현식 $N$에 대한 적용을 대입으로 치환하는 변환이다.
+이는 $x = 5$에서 함수 $f(x) = x^2 -4x -2$의 함숫값을 $f(5)$로 표기한 뒤, 계산하여 $f(5)$ 대신 $3$으로 표기하는 것과 같다.</p>
+<p>다만 $\beta$-축약 전 $\alpha$-전환을 사용하여 표현식 $N$의 자유 변수 중 표현식 $M$의 바운드 변수가 없도록 변환하여야 한다.</p>
+<p>$(\lambda x. \lambda y. xy) y \nrightarrow_\beta \lambda y. yy$</p>
+<p>$(\lambda x. \lambda y. xy) y \rightarrow_\alpha
+(\lambda x. \lambda z. xz) y \rightarrow_\beta \lambda z. yz$</p>
+<h3>$\eta$-축약</h3>
+<p>$$
+\lambda x. Mx \rightarrow_\eta M \quad \text{for } x \notin FV(M)
+$$</p>
+<p>$\eta$-축약은 매개 변수 $x$와 표현식 $M$에 대해 $x$에 대한 $M$의 적용을 함숫값으로 가지는 익명 함수를 표현식 $M$으로 치환하는 변환이다.
+이는 임의의 매개 변수에 대해 같은 함숫값을 가지는 두 함수는 동일하다는 함수의 외연성(Extensionality)을 의미하며, 임의의 표현식 $N$에 대해 $(\lambda x. Mx) N$과 $MN$이 $\beta$-동치인 것으로 확인할 수 있다.</p>
+<p>다만 $\eta$-축약은 표현식 $M$이 자유 변수로 변수 $x$를 가지지 않을 때만 성립한다.</p>
+<h2>정규형(Normal Form)</h2>
+<h3>리덱스(Redex)</h3>
+<p>람다 항에서 $\beta$-축약 또는 $\eta$-축약이 가능한 부분을 리덱스(Redex, REDucible EXpression)라고 한다.
+즉, 리덱스는 $(\lambda x. M) N$이나 $\lambda x. Mx$의 형태를 가지는 부분을 의미한다.</p>
+<h3>정규형의 정의</h3>
+<p>정규형은 리덱스가 없어 축약할 수 없는 람다 항을 의미한다.
+더 구체적으로, $\beta$-리덱스가 없는 람다 항을 $\beta$-정규형, $\beta$-리덱스와 $\eta$-리덱스가 둘 다 없는 람다 항을 $\beta$-$\eta$-정규형이라고 한다.</p>
+<h3>정규형의 계산</h3>
+<p>처치-로서 정리(Church–Rosser theorem)에 따라 다음 명제가 성립한다:
+임의의 람다 항에 대해 서로 다른 두 개의 축약열이 존재하는 경우, 각 축약열로 변환된 두 람다 항을 같은 람다 항으로 변환하는 두 축약열이 존재한다.
+처치-로서 정리를 통해 람다 항이 정규형을 가질 때, 그 정규형은 유일함을 증명할 수 있다.</p>
+<p>또한 람다 항에서 가장 앞쪽 리덱스부터 축약하는 순서를 정규 순서(Normal order)라고 한다.
+람다 항이 정규형을 가지는 경우, 람다 항을 정규 순서로 유한 번 변환하여 항상 정규형을 계산할 수 있음이 증명되어 있다.</p>
+<h2>참고 자료</h2>
+<p>이 문서는 영어 및 한국어 위키피디아와 나무위키를 참고하였다.</p>
+<p>이 문서에서 Lambda Calculus의 번역어인 람다 산법 및 람다 산법 관련 번역어는 한국어 및 일본어 위키피디아와 나무위키를 참고하였다.</p>
