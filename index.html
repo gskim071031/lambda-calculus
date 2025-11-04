@@ -1,8 +1,34 @@
+<!doctype html>
+<html lang="ko">
 <head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/contrib/auto-render.min.js"
-  crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+  <meta charset="utf-8">
+  <title>Lambda Calculus</title>
+
+  <!-- KaTeX -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+        crossorigin="anonymous">
+  <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"
+        crossorigin="anonymous"></script>
+  <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/contrib/auto-render.min.js"
+        crossorigin="anonymous"></script>
+
+  <!-- 오토렌더 실행: DOM이 준비되면 수식 스캔 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$",  right: "$",  display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true},
+        ],
+        throwOnError: false
+      });
+    });
+  </script>
 </head>
 <body>
 
@@ -177,6 +203,6 @@ $$</p>
 <p>이 문서는 영어 및 한국어 위키피디아와 나무위키를 참고하였다.</p>
 <p>이 문서에서 Lambda Calculus의 번역어인 람다 산법 및 람다 산법 관련 번역어는 한국어 및 일본어 위키피디아와 나무위키를 참고하였다.</p>
 
+
 </body>
-
-
+</html>
