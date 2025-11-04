@@ -59,9 +59,9 @@ $$
 
 다음은 자유 변수 집합 $FV$와 바운드 변수 집합 $BV$의 정의이다.
 
-1. $FV(x) = \\{x\\} ,\ BV(x) = \varnothing$
+1. $FV(x) = \lbrace x \rbrace ,\ BV(x) = \varnothing$
 
-1. $FV(\lambda x. M) = FV(M) \backslash \\{x\\} ,\ BV(\lambda x. M) = BV(M) \cup \\{x\\}$
+1. $FV(\lambda x. M) = FV(M) \backslash \lbrace x \rbrace ,\ BV(\lambda x. M) = BV(M) \cup \lbrace x \rbrace$
 
 1. $FV(MN) = FV(M) \cup FV(N) ,\ BV(MN) = BV(M) \cup BV(N)$
 
