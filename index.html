@@ -12,11 +12,11 @@
 람다 산법은 다른 계산 모델인 튜링 기계와 동치이며, 처치-튜링 명제에 따라 모든 기계적인 계산은 람다 산법으로 표현할 수 있다고 추정한다.</p>
 <h2>익명 함수(Anonymous function)</h2>
 <p>람다 산법에서 모든 함수는 익명 함수로 정의한다.
-익명 함수는 $λ(\text{매개 변수}).(\text{표현식})$의 형태로 나타내며, 그 자체로 함수이자 변수이다.
+익명 함수는 $λ(\text\{매개 변수\}).(\text\{표현식\})$의 형태로 나타내며, 그 자체로 함수이자 변수이다.
 익명 함수는 한 번에 하나의 매개 변수만 취한다. 다변수 함수의 경우 이를 일변수 함수들로 나누는 과정인 커링(Currying)을 통해 여러 개의 익명 함수로 나타낼 수 있다.</p>
 <p>다음은 일변수 함수 $f(x)$와 다변수 함수 $g(x)$를 익명 함수로 변환하는 예시이다.</p>
 <p>$$
-f(x) = 2x+1 \quad \Rightarrow \quad f = \lambda x. 2x+1 \
+f(x) = 2x+1 \quad \Rightarrow \quad f = \lambda x. 2x+1 \\
 g(x, y) = x^2 + y^2 \quad \Rightarrow \quad g = \lambda x. \lambda y. x^2 + y^2
 $$</p>
 <h2>람다 항(Lambda term)</h2>
@@ -62,10 +62,10 @@ $$</p>
 <p>다음은 자유 변수 집합 $FV$와 바운드 변수 집합 $BV$의 정의이다.</p>
 <ol>
 <li>
-<p>$FV(x) = {x} ,; BV(x) = \varnothing$</p>
+<p>$FV(x) = \{x\} ,; BV(x) = \varnothing$</p>
 </li>
 <li>
-<p>$FV(\lambda x. M) = FV(M) \backslash {x} ,; BV(\lambda x. M) = BV(M) \cup {x}$</p>
+<p>$FV(\lambda x. M) = FV(M) \backslash \{x\} ,; BV(\lambda x. M) = BV(M) \cup \{x\}$</p>
 </li>
 <li>
 <p>$FV(MN) = FV(M) \cup FV(N) ,; BV(MN) = BV(M) \cup BV(N)$</p>
@@ -83,13 +83,13 @@ $$</p>
 <p>$x[x := N] = N$</p>
 </li>
 <li>
-<p>$y[x := N] = y \quad \text{for } x \ne y$</p>
+<p>$y[x := N] = y \quad \text\{for \} x \ne y$</p>
 </li>
 <li>
 <p>$(\lambda x. M)[x := N] = \lambda x. M$</p>
 </li>
 <li>
-<p>$(\lambda y. M)[x := N] = \lambda y. (M [x := N]) \quad \text{for } x \ne y$</p>
+<p>$(\lambda y. M)[x := N] = \lambda y. (M [x := N]) \quad \text\{for \} x \ne y$</p>
 </li>
 <li>
 <p>$(L M)[x := N] = (L [x := N])(M [x := N])$</p>
@@ -121,7 +121,7 @@ $$</p>
 <p>어떤 두 람다 항이 변환 규칙을 통해 같은 람다 항으로 변환된다면 이들을 동치(Equivalent)라고 한다.</p>
 <h3>$\alpha$-전환</h3>
 <p>$$
-\lambda x. M \rightarrow_\alpha \lambda y. M[x := y] \quad \text{for } y \notin FV(M)
+\lambda x. M \rightarrow_\alpha \lambda y. M[x := y] \quad \text\{for \} y \notin FV(M)
 $$</p>
 <p>$\alpha$-전환은 익명 함수 $\lambda x. M$에서 바운드 변수 $x$의 이름을 변경하는 변환이다.
 이는 추상화에서 변수의 이름이 람다 항에 영향을 주지 않음을 의미한다.</p>
@@ -145,7 +145,7 @@ $$</p>
 <p>이러한 문제는 드 브뤼인(de Bruijn) 인덱스 표기 등을 사용하여 방지할 수 있다.</p>
 <h3>$\beta$-축약</h3>
 <p>$$
-(\lambda x. M) N \rightarrow_\beta M[x := N] \quad \text{for } BV(M) \cap FV(N) = \varnothing
+(\lambda x. M) N \rightarrow_\beta M[x := N] \quad \text\{for \} BV(M) \cap FV(N) = \varnothing
 $$</p>
 <p>$\beta$-축약은 익명 함수 $\lambda x. M$의 표현식 $N$에 대한 적용을 대입으로 치환하는 변환이다.
 이는 $x = 5$에서 함수 $f(x) = x^2 -4x -2$의 함숫값을 $f(5)$로 표기한 뒤, 계산하여 $f(5)$ 대신 $3$으로 표기하는 것과 같다.</p>
@@ -155,7 +155,7 @@ $$</p>
 (\lambda x. \lambda z. xz) y \rightarrow_\beta \lambda z. yz$</p>
 <h3>$\eta$-축약</h3>
 <p>$$
-\lambda x. Mx \rightarrow_\eta M \quad \text{for } x \notin FV(M)
+\lambda x. Mx \rightarrow_\eta M \quad \text\{for \} x \notin FV(M)
 $$</p>
 <p>$\eta$-축약은 매개 변수 $x$와 표현식 $M$에 대해 $x$에 대한 $M$의 적용을 함숫값으로 가지는 익명 함수를 표현식 $M$으로 치환하는 변환이다.
 이는 임의의 매개 변수에 대해 같은 함숫값을 가지는 두 함수는 동일하다는 함수의 외연성(Extensionality)을 의미하며, 임의의 표현식 $N$에 대해 $(\lambda x. Mx) N$과 $MN$이 $\beta$-동치인 것으로 확인할 수 있다.</p>
@@ -178,4 +178,5 @@ $$</p>
 <p>이 문서에서 Lambda Calculus의 번역어인 람다 산법 및 람다 산법 관련 번역어는 한국어 및 일본어 위키피디아와 나무위키를 참고하였다.</p>
 
 </body>
+
 
