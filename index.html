@@ -88,13 +88,13 @@ $$</p>
 <p>다음은 자유 변수 집합 $FV$와 바운드 변수 집합 $BV$의 정의이다.</p>
 <ol>
 <li>
-<p>$FV(x) = \{x\} ,; BV(x) = \varnothing$</p>
+<p>$FV(x) = \{x\} ,\; BV(x) = \varnothing$</p>
 </li>
 <li>
-<p>$FV(\lambda x. M) = FV(M) \backslash \{x\} ,; BV(\lambda x. M) = BV(M) \cup \{x\}$</p>
+<p>$FV(\lambda x. M) = FV(M) \backslash \{x\} ,\; BV(\lambda x. M) = BV(M) \cup \{x\}$</p>
 </li>
 <li>
-<p>$FV(MN) = FV(M) \cup FV(N) ,; BV(MN) = BV(M) \cup BV(N)$</p>
+<p>$FV(MN) = FV(M) \cup FV(N) ,\; BV(MN) = BV(M) \cup BV(N)$</p>
 </li>
 </ol>
 <p>$\alpha$-전환을 사용하여 임의의 람다 항 $M$, $N$에 대해 $(FV(M) \cup BV(M)) \cap (FV(N) \cup BV(N)) = \varnothing$이게 변환하는 것이 가능하다.
@@ -156,16 +156,16 @@ $$</p>
 <li>
 <p>이름이 변경되는 변수 $x$는 동일한 추상화로 바인딩 된 변수여야 한다.</p>
 <p>$\lambda x. \lambda x. x \rightarrow_\alpha
-\lambda x. \lambda y. y ,; \lambda y. \lambda x. x$</p>
+\lambda x. \lambda y. y ,\; \lambda y. \lambda x. x$</p>
 <p>$\lambda x. \lambda x. x \nrightarrow_\alpha
-\lambda y. \lambda x. y ,; \lambda y. \lambda y. y$</p>
+\lambda y. \lambda x. y ,\; \lambda y. \lambda y. y$</p>
 </li>
 <li>
 <p>변수 $x$의 변경된 이름 $y$가 다른 추상화에 포획(Capture)되지 않아야 한다.</p>
 <p>$\lambda x. \lambda y. xy \rightarrow_\alpha
-\lambda z. \lambda y. zy ,; \lambda x. \lambda z. xz$</p>
+\lambda z. \lambda y. zy ,\; \lambda x. \lambda z. xz$</p>
 <p>$\lambda x. \lambda y. xy \nrightarrow_\alpha
-\lambda x. \lambda x. xx ,; \lambda y. \lambda y. yy$</p>
+\lambda x. \lambda x. xx ,\; \lambda y. \lambda y. yy$</p>
 </li>
 </ol>
 <p>이러한 문제는 드 브뤼인(de Bruijn) 인덱스 표기 등을 사용하여 방지할 수 있다.</p>
@@ -207,4 +207,5 @@ $$</p>
 
 </body>
 </html>
+
 
