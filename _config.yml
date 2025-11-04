@@ -1,0 +1,5 @@
+title: My Site
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+highlighter: rouge
