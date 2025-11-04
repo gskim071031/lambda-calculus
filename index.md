@@ -1,6 +1,6 @@
 ---
 layout: readme
-title: 람다 산법(Lambda Calculus)
+title: "람다 산법(Lambda Calculus)"
 ---
 
 # 람다 산법(Lambda Calculus)
